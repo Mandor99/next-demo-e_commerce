@@ -1,8 +1,18 @@
+import Products from "../components/Products";
 
-export default function Home() {
+export default function Home({products}) {
   return (
-<h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+    <div>
+      <Products products={products}/>
+    </div>
   )
+}
+
+export async function getStaticProps() {
+  const products = await (await fetch('https://fakestoreapi.com/products')).json()
+  return {
+      props: {
+          products: products
+      }
+  }
 }
